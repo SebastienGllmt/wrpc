@@ -1,0 +1,28 @@
+[package]
+name = "wrpc-transport-host"
+version = "0.5.0"
+description = "wRPC transport that uses the host itself as the transport"
+authors.workspace = true
+categories.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+anyhow = { workspace = true, features = ["std"] }
+bytes = { workspace = true }
+tokio = { workspace = true, features = ["io-util"] }
+wrpc-transport = { workspace = true }
+wasmtime = { workspace = true, features = ["component-model"], optional = true }
+wrpc-runtime-wasmtime = { workspace = true, optional = true }
+
+[features]
+default = []
+wasmtime = ["dep:wasmtime", "dep:wrpc-runtime-wasmtime"]
+
+[dev-dependencies]
+test-log = { workspace = true, features = ["color", "log", "trace"] }
+wasmtime = { workspace = true, features = ["cranelift", "runtime", "component-model"] }
+wasmtime-wasi = { workspace = true }
+wrpc-runtime-wasmtime = { workspace = true }
+tracing = { workspace = true }
