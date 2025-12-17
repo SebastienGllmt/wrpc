@@ -5470,6 +5470,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "wrpc-transport-host"
+version = "0.5.0"
+dependencies = [
+ "anyhow",
+ "bytes",
+ "futures",
+ "test-log",
+ "tokio",
+ "tokio-stream",
+ "tokio-util",
+ "tracing",
+ "wasmtime",
+ "wasmtime-wasi",
+ "wrpc-runtime-wasmtime",
+ "wrpc-transport",
+]
+
+[[package]]
 name = "wrpc-transport-memory"
 version = "0.5.0"
 dependencies = [

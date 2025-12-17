@@ -11,7 +11,10 @@ repository.workspace = true
 [dependencies]
 anyhow = { workspace = true, features = ["std"] }
 bytes = { workspace = true }
+futures = { workspace = true, features = ["std"] }
 tokio = { workspace = true, features = ["io-util"] }
+tokio-stream = { workspace = true }
+tokio-util = { workspace = true, features = ["io"] }
 wrpc-transport = { workspace = true }
 wasmtime = { workspace = true, features = ["component-model"], optional = true }
 wrpc-runtime-wasmtime = { workspace = true, optional = true }

@@ -1,0 +1,16 @@
+{
+  "name": "wrpc-transport-host-test",
+  "version": "0.1.0",
+  "description": "Node.js test setup for wRPC host transport",
+  "type": "module",
+  "scripts": {
+    "generate-bindings": "jco types ../../wit/transport.wit -o ./bindings",
+    "test": "node --test test/*.test.js"
+  },
+  "devDependencies": {
+    "@bytecodealliance/jco": "^1.15.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

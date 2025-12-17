@@ -1,0 +1,65 @@
+package wrpc:host-transport@0.1.0;
+
+/// Host-provided transport interface for wRPC
+///
+/// This interface allows the host (e.g., JavaScript in a browser) to provide
+/// the transport implementation. This is useful for constrained environments
+/// that may not be able to use other transports like TCP or QUIC.
+interface transport {
+    /// Unit type for futures that return nothing
+    /// Using tuple<> as a workaround since future<()> is not supported by all WIT parsers
+    type unit = tuple<>;
+
+    /// A bidirectional channel for wRPC communication
+    ///
+    /// Each channel represents a single invocation. The channel is created
+    /// for each `invoke()` call and closed after the request completes.
+    resource channel {
+        /// Read data from the channel as a stream of byte chunks
+        ///
+        /// Returns a stream that yields `list<u8>` chunks. An empty chunk
+        /// indicates the end of the stream.
+        read: func() -> stream<list<u8>>;
+        
+        /// Write a chunk of data to the channel
+        ///
+        /// Writes are buffered and sent asynchronously. The future completes
+        /// when the data has been written (but not necessarily received).
+        write: func(data: list<u8>) -> future<unit>;
+        
+        /// Close the channel (indicates no more writes)
+        ///
+        /// After closing, no more writes should be attempted. The channel
+        /// may still be read from until the peer closes their side.
+        close: func() -> future<unit>;
+    }
+    
+    /// Create a new channel for a client invocation
+    ///
+    /// The host should set up the channel (e.g., MessageChannel ports in
+    /// a browser) and route it to the server's host, which will queue it
+    /// for `accept-channel`.
+    ///
+    /// The host is responsible for:
+    /// - Creating the underlying transport connection (e.g., MessageChannel)
+    /// - Routing the channel to the server's host
+    /// - Ensuring the server's host receives it and queues it
+    create-invocation-channel: func() -> future<channel>;
+    
+    /// Accept an incoming channel from the queue
+    ///
+    /// Blocks until a channel is available. The channel is pushed by the
+    /// host when it receives a message from the client's host.
+    ///
+    /// The host should:
+    /// - Maintain a queue of incoming channels
+    /// - Push channels to the queue when they arrive from the client's host
+    /// - Return channels from the queue when this function is called
+    accept-channel: func() -> future<channel>;
+}
+
+/// World that imports the transport interface
+/// This is what the WASM component will import
+world host-transport {
+    import transport;
+}
