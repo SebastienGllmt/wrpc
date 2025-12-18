@@ -18,6 +18,7 @@ tokio-util = { workspace = true, features = ["io"] }
 wrpc-transport = { workspace = true }
 wasmtime = { workspace = true, features = ["component-model"], optional = true }
 wrpc-runtime-wasmtime = { workspace = true, optional = true }
+wit-bindgen = { workspace = true, features = ["async", "std", "macros", "realloc"] }
 
 [features]
 default = []

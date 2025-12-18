@@ -6,10 +6,6 @@ package wrpc:host-transport@0.1.0;
 /// the transport implementation. This is useful for constrained environments
 /// that may not be able to use other transports like TCP or QUIC.
 interface transport {
-    /// Unit type for futures that return nothing
-    /// Using tuple<> as a workaround since future<()> is not supported by all WIT parsers
-    type unit = tuple<>;
-
     /// A bidirectional channel for wRPC communication
     ///
     /// Each channel represents a single invocation. The channel is created
@@ -25,13 +21,13 @@ interface transport {
         ///
         /// Writes are buffered and sent asynchronously. The future completes
         /// when the data has been written (but not necessarily received).
-        write: func(data: list<u8>) -> future<unit>;
+        write: func(data: list<u8>) -> future;
         
         /// Close the channel (indicates no more writes)
         ///
         /// After closing, no more writes should be attempted. The channel
         /// may still be read from until the peer closes their side.
-        close: func() -> future<unit>;
+        close: func() -> future;
     }
     
     /// Create a new channel for a client invocation

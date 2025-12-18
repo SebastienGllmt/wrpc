@@ -1369,7 +1369,21 @@ dependencies = [
  "tokio",
  "tracing-subscriber",
  "wit-bindgen-wrpc",
- "wrpc-transport",
+ "wrpc-transport-host",
+]
+
+[[package]]
+name = "hello-host-server"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "clap",
+ "futures",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
+ "wit-bindgen-wrpc",
+ "wrpc-transport-host",
 ]
 
 [[package]]
@@ -5146,6 +5160,8 @@ version = "0.45.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5c573471f125075647d03df72e026074b7203790d41351cd6edc96f46bcccd36"
 dependencies = [
+ "futures",
+ "once_cell",
  "wit-bindgen-rust-macro",
 ]
 
@@ -5393,6 +5409,7 @@ dependencies = [
  "wrpc-runtime-wasmtime",
  "wrpc-test",
  "wrpc-transport",
+ "wrpc-transport-host",
  "wrpc-transport-memory",
  "wrpc-transport-nats",
  "wrpc-transport-quic",
@@ -5495,6 +5512,7 @@ dependencies = [
  "tracing",
  "wasmtime",
  "wasmtime-wasi",
+ "wit-bindgen 0.45.1",
  "wrpc-runtime-wasmtime",
  "wrpc-transport",
 ]

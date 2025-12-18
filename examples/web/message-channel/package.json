@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "generate-bindings": "jco types ../../../crates/transport-host/wit/transport.wit -o ./bindings",
-    "test": "node --test test/*.test.js"
+    "transpile-wasm": "jco transpile ../../../target/wasm32-wasip2/release/hello-host-server.wasm -o ./wasm",
+    "test": "node --test test/*.test.js",
+    "build-wasm": "cargo build --release -p hello-host-server --target wasm32-wasip2"
   },
   "devDependencies": {
     "@bytecodealliance/jco": "^1.15.4"
