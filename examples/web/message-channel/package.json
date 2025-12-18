@@ -1,10 +1,10 @@
 {
-  "name": "wrpc-transport-host-test",
+  "name": "wrpc-transport-host-web",
   "version": "0.1.0",
   "description": "Node.js test setup for wRPC host transport",
   "type": "module",
   "scripts": {
-    "generate-bindings": "jco types ../../wit/transport.wit -o ./bindings",
+    "generate-bindings": "jco types ../../../crates/transport-host/wit/transport.wit -o ./bindings",
     "test": "node --test test/*.test.js"
   },
   "devDependencies": {

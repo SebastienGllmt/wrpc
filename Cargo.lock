@@ -1361,6 +1361,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "hello-host-client"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "clap",
+ "tokio",
+ "tracing-subscriber",
+ "wit-bindgen-wrpc",
+ "wrpc-transport",
+]
+
+[[package]]
 name = "hello-http-tcp-proxy"
 version = "0.1.0"
 dependencies = [

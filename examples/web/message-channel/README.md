@@ -2,6 +2,8 @@
 
 This directory contains Node.js setup and tests for implementing the wRPC host transport interface.
 
+Both the server and the client are implementing in this package for ease of testing. In practice, these could be separate projects (as long as they're deployed in a way such that they can communicate over MessageChannel)
+
 ## Architecture
 
 The TypeScript/JavaScript code is the **host** that implements the WIT interface. The WASM component (built from the Rust wRPC code) will **import** this interface and call the host's implementation.
